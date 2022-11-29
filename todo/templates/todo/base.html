@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    {% if user.is_authenticated %}
+
+        Logged in as {{ user.username }}
+
+        <a href="{% url 'createTodo' %}">Create To do</a>
+        <a href="{% url 'currentToDos' %}">Current To dos</a>
+        <a href="{% url 'completedTodos' %}">View Completed To dos</a>
+
+        <form action="{% url 'logOutUser' %}" method="POST">
+            {% csrf_token %}
+        <button type="submit">Log out</button>
+        </form>
+
+    {% else %}
+
+        <a href="{% url 'loginUser' %}">Login</a>
+        <a href="{% url 'signupuser' %}">Sign up</a>
+
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+
+</body>
+</html>
